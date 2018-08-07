@@ -332,22 +332,23 @@ abstract class ChartLegendLabelOptions {
 abstract class ChartTooltipOptions {
   external bool get enabled;
   external set enabled(bool v);
-  external VoidFunc1<dynamic> get custom;
-  external set custom(VoidFunc1<dynamic> v);
+  external void custom(dynamic a);
   external String get mode;
   external set mode(String v);
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get backgroundColor;
+  external bool get intersect;
+  external set intersect(bool v);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get backgroundColor;
   external set backgroundColor(
-      dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external String get titleFontFamily;
   external set titleFontFamily(String v);
   external num get titleFontSize;
   external set titleFontSize(num v);
   external String get titleFontStyle;
   external set titleFontStyle(String v);
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get titleFontColor;
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get titleFontColor;
   external set titleFontColor(
-      dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external num get titleSpacing;
   external set titleSpacing(num v);
   external num get titleMarginBottom;
@@ -358,8 +359,9 @@ abstract class ChartTooltipOptions {
   external set bodyFontSize(num v);
   external String get bodyFontStyle;
   external set bodyFontStyle(String v);
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get bodyFontColor;
-  external set bodyFontColor(dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get bodyFontColor;
+  external set bodyFontColor(
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external num get bodySpacing;
   external set bodySpacing(num v);
   external String get footerFontFamily;
@@ -368,9 +370,9 @@ abstract class ChartTooltipOptions {
   external set footerFontSize(num v);
   external String get footerFontStyle;
   external set footerFontStyle(String v);
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get footerFontColor;
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get footerFontColor;
   external set footerFontColor(
-      dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external num get footerSpacing;
   external set footerSpacing(num v);
   external num get footerMarginTop;
@@ -387,34 +389,19 @@ abstract class ChartTooltipOptions {
   external set multiKeyBackground(String v);
   external ChartTooltipCallback get callbacks;
   external set callbacks(ChartTooltipCallback v);
-  external factory ChartTooltipOptions(
-      {bool enabled,
-      VoidFunc1<dynamic> custom,
-      String mode,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ backgroundColor,
-      String titleFontFamily,
-      num titleFontSize,
-      String titleFontStyle,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ titleFontColor,
-      num titleSpacing,
-      num titleMarginBottom,
-      String bodyFontFamily,
-      num bodyFontSize,
-      String bodyFontStyle,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ bodyFontColor,
-      num bodySpacing,
-      String footerFontFamily,
-      num footerFontSize,
-      String footerFontStyle,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ footerFontColor,
-      num footerSpacing,
-      num footerMarginTop,
-      num xPadding,
-      num yPadding,
-      num caretSize,
-      num cornerRadius,
-      String multiKeyBackground,
-      ChartTooltipCallback callbacks});
+  external bool filter(ChartTooltipItem item);
+  external num itemSort(ChartTooltipItem itemA, ChartTooltipItem itemB);
+  external String /*'average'|'nearest'*/ get position;
+  external set position(String /*'average'|'nearest'*/ v);
+  external num get caretPadding;
+  external set caretPadding(num v);
+  external bool get displayColors;
+  external set displayColors(bool v);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get borderColor;
+  external set borderColor(
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
+  external num get borderWidth;
+  external set borderWidth(num v);
 }
 
 @anonymous
@@ -439,19 +426,9 @@ abstract class ChartAnimationObject {
   external set numSteps(num v);
   external String get easing;
   external set easing(String v);
-  external VoidFunc1<dynamic> get render;
-  external set render(VoidFunc1<dynamic> v);
-  external VoidFunc1<dynamic> get onAnimationProgress;
-  external set onAnimationProgress(VoidFunc1<dynamic> v);
-  external VoidFunc1<dynamic> get onAnimationComplete;
-  external set onAnimationComplete(VoidFunc1<dynamic> v);
-  external factory ChartAnimationObject(
-      {num currentStep,
-      num numSteps,
-      String easing,
-      VoidFunc1<dynamic> render,
-      VoidFunc1<dynamic> onAnimationProgress,
-      VoidFunc1<dynamic> onAnimationComplete});
+  external void render(dynamic arg);
+  external void onAnimationProgress(dynamic arg);
+  external void onAnimationComplete(dynamic arg);
 }
 
 @anonymous
@@ -1099,20 +1076,6 @@ abstract class TimeScale implements ChartScales {
       String /*'category'|'linear'|'logarithmic'|'time'|'radialLinear'|String*/ type,
       bool display,
       String /*'left'|'right'|'top'|'bottom'|String*/ position,
-      VoidFunc1Opt1<dynamic> beforeUpdate,
-      VoidFunc1Opt1<dynamic> beforeSetDimension,
-      VoidFunc1Opt1<dynamic> beforeDataLimits,
-      VoidFunc1Opt1<dynamic> beforeBuildTicks,
-      VoidFunc1Opt1<dynamic> beforeTickToLabelConversion,
-      VoidFunc1Opt1<dynamic> beforeCalculateTickRotation,
-      VoidFunc1Opt1<dynamic> beforeFit,
-      VoidFunc1Opt1<dynamic> afterUpdate,
-      VoidFunc1Opt1<dynamic> afterSetDimension,
-      VoidFunc1Opt1<dynamic> afterDataLimits,
-      VoidFunc1Opt1<dynamic> afterBuildTicks,
-      VoidFunc1Opt1<dynamic> afterTickToLabelConversion,
-      VoidFunc1Opt1<dynamic> afterCalculateTickRotation,
-      VoidFunc1Opt1<dynamic> afterFit,
       GridLineOptions gridLines,
       ScaleTitleOptions scaleLabel,
       TickOptions ticks,
