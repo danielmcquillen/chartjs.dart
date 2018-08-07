@@ -1,18 +1,26 @@
 // Copyright (c) 2016, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-@JS()
+@JS('Chart')
 library chart.js;
 
+import 'dart:html'
+    show CanvasRenderingContext2D, CanvasElement, Event, MouseEvent;
 import 'package:js/js.dart';
-import 'package:func/func.dart';
 
-// Type definitions for Chart.js 2.4.0
-// Project: https://github.com/nnnick/Chart.js
-// Definitions by: Alberto Nuti <https://github.com/anuti>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// from types/chart.js/index.d.ts
-// at commit 354cec620daccfa0ad167ba046651fb5fef69e8a
+import 'src/func.dart';
+
+/// Type definitions for Chart.js 2.6
+/// Project: https://github.com/nnnick/Chart.js
+/// Definitions by: Alberto Nuti <https://github.com/anuti>
+/// Fabien Lavocat <https://github.com/FabienLavocat>
+/// KentarouTakeda <https://github.com/KentarouTakeda>
+/// Larry Bahr <https://github.com/larrybahr>
+/// Daniel Luz <https://github.com/mernen>
+/// Joseph Page <https://github.com/josefpaij>
+/// Dan Manastireanu <https://github.com/danmana>
+/// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
+/// TypeScript Version: 2.3
 
 @anonymous
 @JS()
@@ -151,48 +159,21 @@ abstract class ChartConfiguration {
 
 @anonymous
 @JS()
-abstract class ChartData {}
-
-@anonymous
-@JS()
-abstract class LinearChartData implements ChartData {
-  external List<String> get labels;
-  external set labels(List<String> v);
+abstract class LinearChartData {
+  external List<dynamic /*String|List<String>*/ > get labels;
+  external set labels(List<dynamic /*String|List<String>*/ > v);
   external List<ChartDataSets> get datasets;
   external set datasets(List<ChartDataSets> v);
   external factory LinearChartData(
-      {List<String> labels, List<ChartDataSets> datasets});
+      {List<dynamic /*String|List<String>*/ > labels,
+      List<ChartDataSets> datasets});
 }
+
 
 @anonymous
 @JS()
 abstract class ChartOptions {
-  external bool get responsive;
-  external set responsive(bool v);
-  external num get responsiveAnimationDuration;
-  external set responsiveAnimationDuration(num v);
-  external bool get maintainAspectRatio;
-  external set maintainAspectRatio(bool v);
-  external List<String> get events;
-  external set events(List<String> v);
-  external Func1Opt1<dynamic, dynamic> get onClick;
-  external set onClick(Func1Opt1<dynamic, dynamic> v);
-  external ChartTitleOptions get title;
-  external set title(ChartTitleOptions v);
-  external ChartLegendOptions get legend;
-  external set legend(ChartLegendOptions v);
-  external ChartTooltipOptions get tooltips;
-  external set tooltips(ChartTooltipOptions v);
-  external ChartHoverOptions get hover;
-  external set hover(ChartHoverOptions v);
-  external ChartAnimationOptions get animation;
-  external set animation(ChartAnimationOptions v);
-  external ChartElementsOptions get elements;
-  external set elements(ChartElementsOptions v);
-  external ChartScales get scales;
-  external set scales(ChartScales v);
-  external num get cutoutPercentage;
-  external set cutoutPercentage(num v);
+
   external factory ChartOptions(
       {bool responsive,
       num responsiveAnimationDuration,
@@ -207,6 +188,43 @@ abstract class ChartOptions {
       ChartElementsOptions elements,
       ChartScales scales,
       num cutoutPercentage});
+
+  external bool get responsive;
+  external set responsive(bool v);
+  external num get responsiveAnimationDuration;
+  external set responsiveAnimationDuration(num v);
+  external bool get maintainAspectRatio;
+  external set maintainAspectRatio(bool v);
+  external List<String> get events;
+  external set events(List<String> v);
+  external dynamic onClick(
+      [MouseEvent event, List<dynamic /*{}*/ > activeElements]);
+  external ChartTitleOptions get title;
+  external set title(ChartTitleOptions v);
+  external ChartLegendOptions get legend;
+  external set legend(ChartLegendOptions v);
+  external ChartTooltipOptions get tooltips;
+  external set tooltips(ChartTooltipOptions v);
+  external ChartHoverOptions get hover;
+  external set hover(ChartHoverOptions v);
+  external ChartAnimationOptions get animation;
+  external set animation(ChartAnimationOptions v);
+  external ChartElementsOptions get elements;
+  external set elements(ChartElementsOptions v);
+  external ChartLayoutOptions get layout;
+  external set layout(ChartLayoutOptions v);
+  external ChartScales get scales;
+  external set scales(ChartScales v);
+  external bool get showLines;
+  external set showLines(bool v);
+  external bool get spanGaps;
+  external set spanGaps(bool v);
+  external num get cutoutPercentage;
+  external set cutoutPercentage(num v);
+  external num get circumference;
+  external set circumference(num v);
+  external num get rotation;
+  external set rotation(num v);
 }
 
 @anonymous
@@ -631,15 +649,18 @@ abstract class ScaleTitleOptions {
 
 @anonymous
 @JS()
-abstract class TickOptions {
+abstract class TickOptions<T> {
   external bool get autoSkip;
   external set autoSkip(bool v);
-  external Func3<dynamic, dynamic, dynamic, String> get callback;
-  external set callback(Func3<dynamic, dynamic, dynamic, String> v);
+  external bool get autoSkipPadding;
+  external set autoSkipPadding(bool v);
+  external dynamic /*String|num*/ callback(
+      dynamic value, dynamic index, dynamic values);
   external bool get display;
   external set display(bool v);
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get fontColor;
-  external set fontColor(dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get fontColor;
+  external set fontColor(
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external String get fontFamily;
   external set fontFamily(String v);
   external num get fontSize;
@@ -658,12 +679,13 @@ abstract class TickOptions {
   external set padding(num v);
   external bool get reverse;
   external set reverse(bool v);
-  external num get min;
-  external set min(num v);
-  external num get max;
-  external set max(num v);
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get backdropColor;
-  external set backdropColor(dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+  external dynamic get min;
+  external set min(T v);
+  external dynamic get max;
+  external set max(T v);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get backdropColor;
+  external set backdropColor(
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external num get backdropPaddingX;
   external set backdropPaddingX(num v);
   external num get backdropPaddingY;
@@ -672,27 +694,6 @@ abstract class TickOptions {
   external set maxTicksLimit(num v);
   external bool get showLabelBackdrop;
   external set showLabelBackdrop(bool v);
-  external factory TickOptions(
-      {bool autoSkip,
-      Func3<dynamic, dynamic, dynamic, String> callback,
-      bool display,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ fontColor,
-      String fontFamily,
-      num fontSize,
-      String fontStyle,
-      num labelOffset,
-      num maxRotation,
-      num minRotation,
-      bool mirror,
-      num padding,
-      bool reverse,
-      num min,
-      num max,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ backdropColor,
-      num backdropPaddingX,
-      num backdropPaddingY,
-      num maxTicksLimit,
-      bool showLabelBackdrop});
 }
 
 @anonymous
@@ -733,7 +734,7 @@ abstract class PointLabelOptions {
 
 @anonymous
 @JS()
-abstract class LinearTickOptions implements TickOptions {
+abstract class LinearTickOptions implements TickOptions<num> {
   external bool get beginAtZero;
   external set beginAtZero(bool v);
   external num get min;
@@ -777,7 +778,7 @@ abstract class LinearTickOptions implements TickOptions {
 
 @anonymous
 @JS()
-abstract class LogarithmicTickOptions implements TickOptions {
+abstract class LogarithmicTickOptions implements TickOptions<num> {
   external num get min;
   external set min(num v);
   external num get max;
@@ -891,7 +892,7 @@ abstract class ChartDataSets {
 
 @anonymous
 @JS()
-abstract class ChartScales {
+abstract class ChartScales<T extends TickOptions> {
   external String /*'category'|'linear'|'logarithmic'|'time'|'radialLinear'|String*/ get type;
   external set type(
       String /*'category'|'linear'|'logarithmic'|'time'|'radialLinear'|String*/ v);
@@ -899,40 +900,12 @@ abstract class ChartScales {
   external set display(bool v);
   external String /*'left'|'right'|'top'|'bottom'|String*/ get position;
   external set position(String /*'left'|'right'|'top'|'bottom'|String*/ v);
-  external VoidFunc1Opt1<dynamic> get beforeUpdate;
-  external set beforeUpdate(VoidFunc1Opt1<dynamic> v);
-  external VoidFunc1Opt1<dynamic> get beforeSetDimension;
-  external set beforeSetDimension(VoidFunc1Opt1<dynamic> v);
-  external VoidFunc1Opt1<dynamic> get beforeDataLimits;
-  external set beforeDataLimits(VoidFunc1Opt1<dynamic> v);
-  external VoidFunc1Opt1<dynamic> get beforeBuildTicks;
-  external set beforeBuildTicks(VoidFunc1Opt1<dynamic> v);
-  external VoidFunc1Opt1<dynamic> get beforeTickToLabelConversion;
-  external set beforeTickToLabelConversion(VoidFunc1Opt1<dynamic> v);
-  external VoidFunc1Opt1<dynamic> get beforeCalculateTickRotation;
-  external set beforeCalculateTickRotation(VoidFunc1Opt1<dynamic> v);
-  external VoidFunc1Opt1<dynamic> get beforeFit;
-  external set beforeFit(VoidFunc1Opt1<dynamic> v);
-  external VoidFunc1Opt1<dynamic> get afterUpdate;
-  external set afterUpdate(VoidFunc1Opt1<dynamic> v);
-  external VoidFunc1Opt1<dynamic> get afterSetDimension;
-  external set afterSetDimension(VoidFunc1Opt1<dynamic> v);
-  external VoidFunc1Opt1<dynamic> get afterDataLimits;
-  external set afterDataLimits(VoidFunc1Opt1<dynamic> v);
-  external VoidFunc1Opt1<dynamic> get afterBuildTicks;
-  external set afterBuildTicks(VoidFunc1Opt1<dynamic> v);
-  external VoidFunc1Opt1<dynamic> get afterTickToLabelConversion;
-  external set afterTickToLabelConversion(VoidFunc1Opt1<dynamic> v);
-  external VoidFunc1Opt1<dynamic> get afterCalculateTickRotation;
-  external set afterCalculateTickRotation(VoidFunc1Opt1<dynamic> v);
-  external VoidFunc1Opt1<dynamic> get afterFit;
-  external set afterFit(VoidFunc1Opt1<dynamic> v);
   external GridLineOptions get gridLines;
   external set gridLines(GridLineOptions v);
   external ScaleTitleOptions get scaleLabel;
   external set scaleLabel(ScaleTitleOptions v);
-  external TickOptions get ticks;
-  external set ticks(TickOptions v);
+  external T get ticks;
+  external set ticks(T v);
   external List<ChartXAxe> get xAxes;
   external set xAxes(List<ChartXAxe> v);
   external List<ChartYAxe> get yAxes;
@@ -941,20 +914,6 @@ abstract class ChartScales {
       {String /*'category'|'linear'|'logarithmic'|'time'|'radialLinear'|String*/ type,
       bool display,
       String /*'left'|'right'|'top'|'bottom'|String*/ position,
-      VoidFunc1Opt1<dynamic> beforeUpdate,
-      VoidFunc1Opt1<dynamic> beforeSetDimension,
-      VoidFunc1Opt1<dynamic> beforeDataLimits,
-      VoidFunc1Opt1<dynamic> beforeBuildTicks,
-      VoidFunc1Opt1<dynamic> beforeTickToLabelConversion,
-      VoidFunc1Opt1<dynamic> beforeCalculateTickRotation,
-      VoidFunc1Opt1<dynamic> beforeFit,
-      VoidFunc1Opt1<dynamic> afterUpdate,
-      VoidFunc1Opt1<dynamic> afterSetDimension,
-      VoidFunc1Opt1<dynamic> afterDataLimits,
-      VoidFunc1Opt1<dynamic> afterBuildTicks,
-      VoidFunc1Opt1<dynamic> afterTickToLabelConversion,
-      VoidFunc1Opt1<dynamic> afterCalculateTickRotation,
-      VoidFunc1Opt1<dynamic> afterFit,
       GridLineOptions gridLines,
       ScaleTitleOptions scaleLabel,
       TickOptions ticks,
@@ -1037,28 +996,14 @@ abstract class ChartYAxe implements CommonAxe {
 
 @anonymous
 @JS()
-abstract class LinearScale implements ChartScales {
+abstract class LinearScale implements ChartScales<LinearTickOptions> {
   external LinearTickOptions get ticks;
-  external set ticks(covariant LinearTickOptions v);
+  external set ticks(LinearTickOptions v);
   external factory LinearScale(
       {LinearTickOptions ticks,
       String /*'category'|'linear'|'logarithmic'|'time'|'radialLinear'|String*/ type,
       bool display,
       String /*'left'|'right'|'top'|'bottom'|String*/ position,
-      VoidFunc1Opt1<dynamic> beforeUpdate,
-      VoidFunc1Opt1<dynamic> beforeSetDimension,
-      VoidFunc1Opt1<dynamic> beforeDataLimits,
-      VoidFunc1Opt1<dynamic> beforeBuildTicks,
-      VoidFunc1Opt1<dynamic> beforeTickToLabelConversion,
-      VoidFunc1Opt1<dynamic> beforeCalculateTickRotation,
-      VoidFunc1Opt1<dynamic> beforeFit,
-      VoidFunc1Opt1<dynamic> afterUpdate,
-      VoidFunc1Opt1<dynamic> afterSetDimension,
-      VoidFunc1Opt1<dynamic> afterDataLimits,
-      VoidFunc1Opt1<dynamic> afterBuildTicks,
-      VoidFunc1Opt1<dynamic> afterTickToLabelConversion,
-      VoidFunc1Opt1<dynamic> afterCalculateTickRotation,
-      VoidFunc1Opt1<dynamic> afterFit,
       GridLineOptions gridLines,
       ScaleTitleOptions scaleLabel,
       List<ChartXAxe> xAxes,
@@ -1067,28 +1012,14 @@ abstract class LinearScale implements ChartScales {
 
 @anonymous
 @JS()
-abstract class LogarithmicScale implements ChartScales {
+abstract class LogarithmicScale implements ChartScales<LogarithmicTickOptions> {
   external LogarithmicTickOptions get ticks;
-  external set ticks(covariant LogarithmicTickOptions v);
+  external set ticks(LogarithmicTickOptions v);
   external factory LogarithmicScale(
       {LogarithmicTickOptions ticks,
       String /*'category'|'linear'|'logarithmic'|'time'|'radialLinear'|String*/ type,
       bool display,
       String /*'left'|'right'|'top'|'bottom'|String*/ position,
-      VoidFunc1Opt1<dynamic> beforeUpdate,
-      VoidFunc1Opt1<dynamic> beforeSetDimension,
-      VoidFunc1Opt1<dynamic> beforeDataLimits,
-      VoidFunc1Opt1<dynamic> beforeBuildTicks,
-      VoidFunc1Opt1<dynamic> beforeTickToLabelConversion,
-      VoidFunc1Opt1<dynamic> beforeCalculateTickRotation,
-      VoidFunc1Opt1<dynamic> beforeFit,
-      VoidFunc1Opt1<dynamic> afterUpdate,
-      VoidFunc1Opt1<dynamic> afterSetDimension,
-      VoidFunc1Opt1<dynamic> afterDataLimits,
-      VoidFunc1Opt1<dynamic> afterBuildTicks,
-      VoidFunc1Opt1<dynamic> afterTickToLabelConversion,
-      VoidFunc1Opt1<dynamic> afterCalculateTickRotation,
-      VoidFunc1Opt1<dynamic> afterFit,
       GridLineOptions gridLines,
       ScaleTitleOptions scaleLabel,
       List<ChartXAxe> xAxes,
@@ -1211,14 +1142,16 @@ abstract class RadialLinearScale {
 class Chart {
   // @Ignore
   Chart.fakeConstructor$();
+  //external static dynamic get Chart;
+  //external static set Chart(dynamic v);
   external factory Chart(
       dynamic /*String|JQuery|CanvasRenderingContext2D|CanvasElement|List<String>|List<CanvasRenderingContext2D>|List<CanvasElement>*/ context,
       ChartConfiguration options);
   external dynamic getDatasetMeta(int index);
   external ChartConfiguration get config;
   external set config(ChartConfiguration v);
-  external ChartData get data;
-  external set data(ChartData v);
+  external LinearChartData get data;
+  external set data(LinearChartData v);
   external Func0<dynamic /*{}*/ > get destroy;
   external set destroy(Func0<dynamic /*{}*/ > v);
   external Function /*(duration?: any, lazy?: any) => {}*/ get update;
@@ -1241,6 +1174,15 @@ class Chart {
   external set getElementsAtEvent(Func1<dynamic, List<dynamic /*{}*/ >> v);
   external Func1<dynamic, List<dynamic /*{}*/ >> get getDatasetAtEvent;
   external set getDatasetAtEvent(Func1<dynamic, List<dynamic /*{}*/ >> v);
+  external CanvasRenderingContext2D /*CanvasRenderingContext2D|Null*/ get ctx;
+  external set ctx(
+      CanvasRenderingContext2D /*CanvasRenderingContext2D|Null*/ v);
+  external CanvasElement /*CanvasElement|Null*/ get canvas;
+  external set canvas(CanvasElement /*CanvasElement|Null*/ v);
+  external ChartArea get chartArea;
+  external set chartArea(ChartArea v);
+  external static PluginServiceStatic get pluginService;
+  external static set pluginService(PluginServiceStatic v);
   external static dynamic /*{
         global: Chart.ChartOptions;
     }*/
