@@ -411,12 +411,19 @@ abstract class ChartLegendOptions {
   external set position(String /*'left'|'right'|'top'|'bottom'*/ v);
   external bool get fullWidth;
   external set fullWidth(bool v);
+  external VoidFunc2<dynamic, dynamic> get onClick;
   external void onClick(MouseEvent event, ChartLegendItem legendItem);
   external void onHover(MouseEvent event, ChartLegendItem legendItem);
   external ChartLegendLabelOptions get labels;
   external set labels(ChartLegendLabelOptions v);
   external bool get reverse;
   external set reverse(bool v);
+  external factory ChartLegendOptions(
+      {bool display,
+      String position,
+      bool fullWidth,
+      VoidFunc2<dynamic, dynamic> onClick,
+      ChartLegendLabelOptions labels});
 }
 
 @anonymous
