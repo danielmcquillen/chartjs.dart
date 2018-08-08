@@ -405,14 +405,13 @@ abstract class ChartTitleOptions {
 @anonymous
 @JS()
 abstract class ChartLegendOptions {
-  external bool get display;
+   external bool get display;
   external set display(bool v);
   external String /*'left'|'right'|'top'|'bottom'*/ get position;
   external set position(String /*'left'|'right'|'top'|'bottom'*/ v);
   external bool get fullWidth;
   external set fullWidth(bool v);
-  external VoidFunc2<dynamic, dynamic> get onClick;
-  external set onClick(VoidFunc2<dynamic, dynamic> v);
+  external void onClick(MouseEvent event, ChartLegendItem legendItem);
   external void onHover(MouseEvent event, ChartLegendItem legendItem);
   external ChartLegendLabelOptions get labels;
   external set labels(ChartLegendLabelOptions v);
@@ -422,7 +421,7 @@ abstract class ChartLegendOptions {
       {bool display,
       String position,
       bool fullWidth,
-      VoidFunc2<dynamic, dynamic> onClick,
+      dynamic onClick,
       ChartLegendLabelOptions labels});
 }
 
@@ -894,7 +893,10 @@ abstract class LinearTickOptions implements TickOptions<num> {
       num suggestedMin,
       num suggestedMax,
       bool autoSkip,
-      Func3<dynamic, dynamic, dynamic, String> callback,
+      /* DMcQ: This line from portno's repo doesn't work 
+      *  ...trying a simpler declaration  to get it to compile */
+      /* Func3<dynamic, dynamic, dynamic, String> callback,*/
+      dynamic callback,
       bool display,
       dynamic /*String|CanvasGradient|CanvasPattern*/ fontColor,
       String fontFamily,
