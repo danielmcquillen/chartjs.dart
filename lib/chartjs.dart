@@ -21,6 +21,65 @@ import 'src/func.dart';
 /// Dan Manastireanu <https://github.com/danmana>
 /// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 /// TypeScript Version: 2.3
+/// 
+
+
+@JS()
+class Chart {
+  // @Ignore
+  Chart.fakeConstructor$();
+  //external static dynamic get Chart;
+  //external static set Chart(dynamic v);
+  external factory Chart(
+      dynamic /*String|CanvasRenderingContext2D|CanvasElement|ArrayLike<CanvasRenderingContext2D|CanvasElement>*/ context,
+      ChartConfiguration options);
+  external ChartConfiguration get config;
+  external set config(ChartConfiguration v);
+  external LinearChartData get data;
+  external set data(LinearChartData v);
+  external Func0<dynamic /*{}*/ > get destroy;
+  external set destroy(Func0<dynamic /*{}*/ > v);
+  external Function /*(duration?: any, lazy?: any) => {}*/ get update;
+  external set update(Function /*(duration?: any, lazy?: any) => {}*/ v);
+  external Function /*(duration?: any, lazy?: any) => {}*/ get render;
+  external set render(Function /*(duration?: any, lazy?: any) => {}*/ v);
+  external Func0<dynamic /*{}*/ > get stop;
+  external set stop(Func0<dynamic /*{}*/ > v);
+  external Func0<dynamic /*{}*/ > get resize;
+  external set resize(Func0<dynamic /*{}*/ > v);
+  external Func0<dynamic /*{}*/ > get clear;
+  external set clear(Func0<dynamic /*{}*/ > v);
+  external Func0<String> get toBase64;
+  external set toBase64(Func0<String> v);
+  external Func0<dynamic /*{}*/ > get generateLegend;
+  external set generateLegend(Func0<dynamic /*{}*/ > v);
+  external Func1<dynamic, dynamic /*{}*/ > get getElementAtEvent;
+  external set getElementAtEvent(Func1<dynamic, dynamic /*{}*/ > v);
+  external Func1<dynamic, List<dynamic /*{}*/ >> get getElementsAtEvent;
+  external set getElementsAtEvent(Func1<dynamic, List<dynamic /*{}*/ >> v);
+  external Func1<dynamic, List<dynamic /*{}*/ >> get getDatasetAtEvent;
+  external set getDatasetAtEvent(Func1<dynamic, List<dynamic /*{}*/ >> v);
+  external CanvasRenderingContext2D /*CanvasRenderingContext2D|Null*/ get ctx;
+  external set ctx(
+      CanvasRenderingContext2D /*CanvasRenderingContext2D|Null*/ v);
+  external CanvasElement /*CanvasElement|Null*/ get canvas;
+  external set canvas(CanvasElement /*CanvasElement|Null*/ v);
+  external ChartArea get chartArea;
+  external set chartArea(ChartArea v);
+  external static PluginServiceStatic get pluginService;
+  external static set pluginService(PluginServiceStatic v);
+  external static dynamic
+      /*{
+        global: Chart.ChartOptions & Chart.ChartFontOptions;
+    }*/
+      get defaults;
+  external static set defaults(
+      dynamic
+          /*{
+        global: Chart.ChartOptions & Chart.ChartFontOptions;
+    }*/
+          v);
+}
 
 @anonymous
 @JS()
@@ -147,13 +206,13 @@ abstract class ChartConfiguration {
   external String /*'line'|'bar'|'radar'|'doughnut'|'polarArea'|'bubble'|String*/ get type;
   external set type(
       String /*'line'|'bar'|'radar'|'doughnut'|'polarArea'|'bubble'|String*/ v);
-  external ChartData get data;
-  external set data(ChartData v);
+  external LinearChartData get data;
+  external set data(LinearChartData v);
   external ChartOptions get options;
   external set options(ChartOptions v);
   external factory ChartConfiguration(
       {String /*'line'|'bar'|'radar'|'doughnut'|'polarArea'|'bubble'|String*/ type,
-      ChartData data,
+      LinearChartData data,
       ChartOptions options});
 }
 
@@ -173,7 +232,6 @@ abstract class LinearChartData {
 @anonymous
 @JS()
 abstract class ChartOptions {
-
   external factory ChartOptions(
       {bool responsive,
       num responsiveAnimationDuration,
@@ -230,9 +288,9 @@ abstract class ChartOptions {
 @anonymous
 @JS()
 abstract class ChartFontOptions {
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get defaultFontColor;
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get defaultFontColor;
   external set defaultFontColor(
-      dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external String get defaultFontFamily;
   external set defaultFontFamily(String v);
   external num get defaultFontSize;
@@ -240,7 +298,7 @@ abstract class ChartFontOptions {
   external String get defaultFontStyle;
   external set defaultFontStyle(String v);
   external factory ChartFontOptions(
-      {dynamic /*String|CanvasGradient|CanvasPattern*/ defaultFontColor,
+      {dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ defaultFontColor,
       String defaultFontFamily,
       num defaultFontSize,
       String defaultFontStyle});
@@ -251,16 +309,17 @@ abstract class ChartFontOptions {
 abstract class ChartTitleOptions {
   external bool get display;
   external set display(bool v);
-  external String get position;
-  external set position(String v);
+  external String /*'left'|'right'|'top'|'bottom'*/ get position;
+  external set position(String /*'left'|'right'|'top'|'bottom'*/ v);
   external bool get fullWdith;
   external set fullWdith(bool v);
   external num get fontSize;
   external set fontSize(num v);
   external String get fontFamily;
   external set fontFamily(String v);
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get fontColor;
-  external set fontColor(dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get fontColor;
+  external set fontColor(
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external String get fontStyle;
   external set fontStyle(String v);
   external num get padding;
@@ -269,11 +328,11 @@ abstract class ChartTitleOptions {
   external set text(String v);
   external factory ChartTitleOptions(
       {bool display,
-      String position,
+      String /*'left'|'right'|'top'|'bottom'*/ position,
       bool fullWdith,
       num fontSize,
       String fontFamily,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ fontColor,
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ fontColor,
       String fontStyle,
       num padding,
       String text});
@@ -284,20 +343,16 @@ abstract class ChartTitleOptions {
 abstract class ChartLegendOptions {
   external bool get display;
   external set display(bool v);
-  external String get position;
-  external set position(String v);
+  external String /*'left'|'right'|'top'|'bottom'*/ get position;
+  external set position(String /*'left'|'right'|'top'|'bottom'*/ v);
   external bool get fullWidth;
   external set fullWidth(bool v);
-  external VoidFunc2<dynamic, dynamic> get onClick;
-  external set onClick(VoidFunc2<dynamic, dynamic> v);
+  external void onClick(MouseEvent event, ChartLegendItem legendItem);
+  external void onHover(MouseEvent event, ChartLegendItem legendItem);
   external ChartLegendLabelOptions get labels;
   external set labels(ChartLegendLabelOptions v);
-  external factory ChartLegendOptions(
-      {bool display,
-      String position,
-      bool fullWidth,
-      VoidFunc2<dynamic, dynamic> onClick,
-      ChartLegendLabelOptions labels});
+  external bool get reverse;
+  external set reverse(bool v);
 }
 
 @anonymous
@@ -307,24 +362,16 @@ abstract class ChartLegendLabelOptions {
   external set boxWidth(num v);
   external num get fontSize;
   external set fontSize(num v);
-  external num get fontStyle;
-  external set fontStyle(num v);
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get fontColor;
-  external set fontColor(dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+  external String get fontStyle;
+  external set fontStyle(String v);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get fontColor;
+  external set fontColor(
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external String get fontFamily;
   external set fontFamily(String v);
   external num get padding;
   external set padding(num v);
-  external Func1<dynamic, dynamic> get generateLabels;
-  external set generateLabels(Func1<dynamic, dynamic> v);
-  external factory ChartLegendLabelOptions(
-      {num boxWidth,
-      num fontSize,
-      num fontStyle,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ fontColor,
-      String fontFamily,
-      num padding,
-      Func1<dynamic, dynamic> generateLabels});
+  external dynamic generateLabels(dynamic chart);
 }
 
 @anonymous
@@ -411,11 +458,12 @@ abstract class ChartHoverOptions {
   external set mode(String v);
   external num get animationDuration;
   external set animationDuration(num v);
-  external VoidFunc1<dynamic> get onHover;
-  external set onHover(VoidFunc1<dynamic> v);
-  external factory ChartHoverOptions(
-      {String mode, num animationDuration, VoidFunc1<dynamic> onHover});
+  external bool get intersect;
+  external set intersect(bool v);
+  external void onHover(dynamic active);
 }
+
+
 
 @anonymous
 @JS()
@@ -438,16 +486,10 @@ abstract class ChartAnimationOptions {
   external set duration(num v);
   external String get easing;
   external set easing(String v);
-  external VoidFunc1<dynamic> get onProgress;
-  external set onProgress(VoidFunc1<dynamic> v);
-  external VoidFunc1<dynamic> get onComplete;
-  external set onComplete(VoidFunc1<dynamic> v);
-  external factory ChartAnimationOptions(
-      {num duration,
-      String easing,
-      VoidFunc1<dynamic> onProgress,
-      VoidFunc1<dynamic> onComplete});
+  external void onProgress(dynamic chart);
+  external void onComplete(dynamic chart);
 }
+
 
 @anonymous
 @JS()
@@ -470,31 +512,35 @@ abstract class ChartElementsOptions {
 @anonymous
 @JS()
 abstract class ChartArcOptions {
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get backgroundColor;
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get backgroundColor;
   external set backgroundColor(
-      dynamic /*String|CanvasGradient|CanvasPattern*/ v);
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get borderColor;
-  external set borderColor(dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get borderColor;
+  external set borderColor(
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external num get borderWidth;
   external set borderWidth(num v);
   external factory ChartArcOptions(
-      {dynamic /*String|CanvasGradient|CanvasPattern*/ backgroundColor,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ borderColor,
+      {dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ backgroundColor,
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ borderColor,
       num borderWidth});
 }
+
+
 
 @anonymous
 @JS()
 abstract class ChartLineOptions {
   external num get tension;
   external set tension(num v);
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get backgroundColor;
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get backgroundColor;
   external set backgroundColor(
-      dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external num get borderWidth;
   external set borderWidth(num v);
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get borderColor;
-  external set borderColor(dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get borderColor;
+  external set borderColor(
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external String get borderCapStyle;
   external set borderCapStyle(String v);
   external List<dynamic> get borderDash;
@@ -503,15 +549,24 @@ abstract class ChartLineOptions {
   external set borderDashOffset(num v);
   external String get borderJoinStyle;
   external set borderJoinStyle(String v);
+  external bool get capBezierPoints;
+  external set capBezierPoints(bool v);
+  external dynamic /*'zero'|'top'|'bottom'|bool*/ get fill;
+  external set fill(dynamic /*'zero'|'top'|'bottom'|bool*/ v);
+  external bool get stepped;
+  external set stepped(bool v);
   external factory ChartLineOptions(
       {num tension,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ backgroundColor,
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ backgroundColor,
       num borderWidth,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ borderColor,
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ borderColor,
       String borderCapStyle,
       List<dynamic> borderDash,
       num borderDashOffset,
-      String borderJoinStyle});
+      String borderJoinStyle,
+      bool capBezierPoints,
+      dynamic /*'zero'|'top'|'bottom'|bool*/ fill,
+      bool stepped});
 }
 
 @anonymous
@@ -519,15 +574,17 @@ abstract class ChartLineOptions {
 abstract class ChartPointOptions {
   external num get radius;
   external set radius(num v);
-  external String get pointStyle;
-  external set pointStyle(String v);
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get backgroundColor;
+  external String /*'circle'|'cross'|'crossRot'|'dash'|'line'|'rect'|'rectRounded'|'rectRot'|'star'|'triangle'*/ get pointStyle;
+  external set pointStyle(
+      String /*'circle'|'cross'|'crossRot'|'dash'|'line'|'rect'|'rectRounded'|'rectRot'|'star'|'triangle'*/ v);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get backgroundColor;
   external set backgroundColor(
-      dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external num get borderWidth;
   external set borderWidth(num v);
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get borderColor;
-  external set borderColor(dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get borderColor;
+  external set borderColor(
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external num get hitRadius;
   external set hitRadius(num v);
   external num get hoverRadius;
@@ -536,10 +593,10 @@ abstract class ChartPointOptions {
   external set hoverBorderWidth(num v);
   external factory ChartPointOptions(
       {num radius,
-      String pointStyle,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ backgroundColor,
+      String /*'circle'|'cross'|'crossRot'|'dash'|'line'|'rect'|'rectRounded'|'rectRot'|'star'|'triangle'*/ pointStyle,
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ backgroundColor,
       num borderWidth,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ borderColor,
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ borderColor,
       num hitRadius,
       num hoverRadius,
       num hoverBorderWidth});
@@ -548,21 +605,48 @@ abstract class ChartPointOptions {
 @anonymous
 @JS()
 abstract class ChartRectangleOptions {
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get backgroundColor;
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get backgroundColor;
   external set backgroundColor(
-      dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external num get borderWidth;
   external set borderWidth(num v);
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get borderColor;
-  external set borderColor(dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get borderColor;
+  external set borderColor(
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external String get borderSkipped;
   external set borderSkipped(String v);
   external factory ChartRectangleOptions(
-      {dynamic /*String|CanvasGradient|CanvasPattern*/ backgroundColor,
+      {dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ backgroundColor,
       num borderWidth,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ borderColor,
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ borderColor,
       String borderSkipped});
 }
+
+
+@anonymous
+@JS()
+abstract class ChartLayoutOptions {
+  external dynamic /*ChartLayoutPaddingObject|num*/ get padding;
+  external set padding(dynamic /*ChartLayoutPaddingObject|num*/ v);
+  external factory ChartLayoutOptions(
+      {dynamic /*ChartLayoutPaddingObject|num*/ padding});
+}
+
+@anonymous
+@JS()
+abstract class ChartLayoutPaddingObject {
+  external num get top;
+  external set top(num v);
+  external num get right;
+  external set right(num v);
+  external num get bottom;
+  external set bottom(num v);
+  external num get left;
+  external set left(num v);
+  external factory ChartLayoutPaddingObject(
+      {num top, num right, num bottom, num left});
+}
+
 
 @anonymous
 @JS()
@@ -678,35 +762,30 @@ abstract class TickOptions<T> {
 abstract class AngleLineOptions {
   external bool get display;
   external set display(bool v);
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get color;
-  external set color(dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get color;
+  external set color(
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external num get lineWidth;
   external set lineWidth(num v);
   external factory AngleLineOptions(
       {bool display,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ color,
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ color,
       num lineWidth});
 }
 
 @anonymous
 @JS()
 abstract class PointLabelOptions {
-  external Func1<dynamic, dynamic> get callback;
-  external set callback(Func1<dynamic, dynamic> v);
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get fontColor;
-  external set fontColor(dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+  external dynamic callback(dynamic arg);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get fontColor;
+  external set fontColor(
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external String get fontFamily;
   external set fontFamily(String v);
   external num get fontSize;
   external set fontSize(num v);
   external String get fontStyle;
   external set fontStyle(String v);
-  external factory PointLabelOptions(
-      {Func1<dynamic, dynamic> callback,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ fontColor,
-      String fontFamily,
-      num fontSize,
-      String fontStyle});
 }
 
 @anonymous
@@ -726,31 +805,6 @@ abstract class LinearTickOptions implements TickOptions<num> {
   external set suggestedMin(num v);
   external num get suggestedMax;
   external set suggestedMax(num v);
-  external factory LinearTickOptions(
-      {bool beginAtZero,
-      num min,
-      num max,
-      num maxTicksLimit,
-      num stepSize,
-      num suggestedMin,
-      num suggestedMax,
-      bool autoSkip,
-      Func3<dynamic, dynamic, dynamic, String> callback,
-      bool display,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ fontColor,
-      String fontFamily,
-      num fontSize,
-      String fontStyle,
-      num labelOffset,
-      num maxRotation,
-      num minRotation,
-      bool mirror,
-      num padding,
-      bool reverse,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ backdropColor,
-      num backdropPaddingX,
-      num backdropPaddingY,
-      bool showLabelBackdrop});
 }
 
 @anonymous
@@ -760,41 +814,22 @@ abstract class LogarithmicTickOptions implements TickOptions<num> {
   external set min(num v);
   external num get max;
   external set max(num v);
-  external factory LogarithmicTickOptions(
-      {num min,
-      num max,
-      bool autoSkip,
-      Func3<dynamic, dynamic, dynamic, String> callback,
-      bool display,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ fontColor,
-      String fontFamily,
-      num fontSize,
-      String fontStyle,
-      num labelOffset,
-      num maxRotation,
-      num minRotation,
-      bool mirror,
-      num padding,
-      bool reverse,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ backdropColor,
-      num backdropPaddingX,
-      num backdropPaddingY,
-      num maxTicksLimit,
-      bool showLabelBackdrop});
 }
 
 /*type ChartColor = string | CanvasGradient | CanvasPattern;*/
 @anonymous
 @JS()
 abstract class ChartDataSets {
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get backgroundColor;
+  external String /*'default'|'monotone'*/ get cubicInterpolationMode;
+  external set cubicInterpolationMode(String /*'default'|'monotone'*/ v);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>|List<String|CanvasGradient|CanvasPattern|List<String>>*/ get backgroundColor;
   external set backgroundColor(
-      dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>|List<String|CanvasGradient|CanvasPattern|List<String>>*/ v);
   external num get borderWidth;
-  external set type(String type);
   external set borderWidth(num v);
-  external dynamic /*String|CanvasGradient|CanvasPattern*/ get borderColor;
-  external set borderColor(dynamic /*String|CanvasGradient|CanvasPattern*/ v);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ get borderColor;
+  external set borderColor(
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ v);
   external String get borderCapStyle;
   external set borderCapStyle(String v);
   external List<num> get borderDash;
@@ -803,20 +838,30 @@ abstract class ChartDataSets {
   external set borderDashOffset(num v);
   external String get borderJoinStyle;
   external set borderJoinStyle(String v);
+  external String /*'left'|'right'|'top'|'bottom'*/ get borderSkipped;
+  external set borderSkipped(String /*'left'|'right'|'top'|'bottom'*/ v);
   external List<dynamic> /*List<num>|List<ChartPoint>*/ get data;
   external set data(List<dynamic> /*List<num>|List<ChartPoint>*/ v);
-  external bool get fill;
-  external set fill(bool v);
+  external dynamic /*bool|num|String*/ get fill;
+  external set fill(dynamic /*bool|num|String*/ v);
+  external dynamic /*String|List<String>*/ get hoverBackgroundColor;
+  external set hoverBackgroundColor(dynamic /*String|List<String>*/ v);
+  external dynamic /*String|List<String>*/ get hoverBorderColor;
+  external set hoverBorderColor(dynamic /*String|List<String>*/ v);
+  external dynamic /*num|List<num>*/ get hoverBorderWidth;
+  external set hoverBorderWidth(dynamic /*num|List<num>*/ v);
   external String get label;
   external set label(String v);
   external num get lineTension;
   external set lineTension(num v);
-  external dynamic /*String|CanvasGradient|CanvasPattern|List<String|CanvasGradient|CanvasPattern>*/ get pointBorderColor;
+  external dynamic /*'before'|'after'|bool*/ get steppedLine;
+  external set steppedLine(dynamic /*'before'|'after'|bool*/ v);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>|List<String|CanvasGradient|CanvasPattern|List<String>>*/ get pointBorderColor;
   external set pointBorderColor(
-      dynamic /*String|CanvasGradient|CanvasPattern|List<String|CanvasGradient|CanvasPattern>*/ v);
-  external dynamic /*String|CanvasGradient|CanvasPattern|List<String|CanvasGradient|CanvasPattern>*/ get pointBackgroundColor;
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>|List<String|CanvasGradient|CanvasPattern|List<String>>*/ v);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>|List<String|CanvasGradient|CanvasPattern|List<String>>*/ get pointBackgroundColor;
   external set pointBackgroundColor(
-      dynamic /*String|CanvasGradient|CanvasPattern|List<String|CanvasGradient|CanvasPattern>*/ v);
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>|List<String|CanvasGradient|CanvasPattern|List<String>>*/ v);
   external dynamic /*num|List<num>*/ get pointBorderWidth;
   external set pointBorderWidth(dynamic /*num|List<num>*/ v);
   external dynamic /*num|List<num>*/ get pointRadius;
@@ -825,46 +870,69 @@ abstract class ChartDataSets {
   external set pointHoverRadius(dynamic /*num|List<num>*/ v);
   external dynamic /*num|List<num>*/ get pointHitRadius;
   external set pointHitRadius(dynamic /*num|List<num>*/ v);
-  external dynamic /*String|CanvasGradient|CanvasPattern|List<String|CanvasGradient|CanvasPattern>*/ get pointHoverBackgroundColor;
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>|List<String|CanvasGradient|CanvasPattern|List<String>>*/ get pointHoverBackgroundColor;
   external set pointHoverBackgroundColor(
-      dynamic /*String|CanvasGradient|CanvasPattern|List<String|CanvasGradient|CanvasPattern>*/ v);
-  external dynamic /*String|CanvasGradient|CanvasPattern|List<String|CanvasGradient|CanvasPattern>*/ get pointHoverBorderColor;
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>|List<String|CanvasGradient|CanvasPattern|List<String>>*/ v);
+  external dynamic /*String|CanvasGradient|CanvasPattern|List<String>|List<String|CanvasGradient|CanvasPattern|List<String>>*/ get pointHoverBorderColor;
   external set pointHoverBorderColor(
-      dynamic /*String|CanvasGradient|CanvasPattern|List<String|CanvasGradient|CanvasPattern>*/ v);
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>|List<String|CanvasGradient|CanvasPattern|List<String>>*/ v);
   external dynamic /*num|List<num>*/ get pointHoverBorderWidth;
   external set pointHoverBorderWidth(dynamic /*num|List<num>*/ v);
-  external dynamic /*String|List<String>|ImageElement|List<ImageElement>*/ get pointStyle;
+  external dynamic /*'circle'|'cross'|'crossRot'|'dash'|'line'|'rect'|'rectRounded'|'rectRot'|'star'|'triangle'|ImageElement|List<'circle'|'cross'|'crossRot'|'dash'|'line'|'rect'|'rectRounded'|'rectRot'|'star'|'triangle'|ImageElement>*/ get pointStyle;
   external set pointStyle(
-      dynamic /*String|List<String>|ImageElement|List<ImageElement>*/ v);
+      dynamic /*'circle'|'cross'|'crossRot'|'dash'|'line'|'rect'|'rectRounded'|'rectRot'|'star'|'triangle'|ImageElement|List<'circle'|'cross'|'crossRot'|'dash'|'line'|'rect'|'rectRounded'|'rectRot'|'star'|'triangle'|ImageElement>*/ v);
   external String get xAxisID;
   external set xAxisID(String v);
   external String get yAxisID;
   external set yAxisID(String v);
+  external String get type;
+  external set type(String v);
+  external bool get hidden;
+  external set hidden(bool v);
+  external bool get hideInLegendAndTooltip;
+  external set hideInLegendAndTooltip(bool v);
+  external bool get showLine;
+  external set showLine(bool v);
+  external String get stack;
+  external set stack(String v);
+  external bool get spanGaps;
+  external set spanGaps(bool v);
   external factory ChartDataSets(
-      {dynamic /*String|CanvasGradient|CanvasPattern*/ backgroundColor,
-      dynamic type,
+      {String /*'default'|'monotone'*/ cubicInterpolationMode,
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>|List<String|CanvasGradient|CanvasPattern|List<String>>*/ backgroundColor,
       num borderWidth,
-      dynamic /*String|CanvasGradient|CanvasPattern*/ borderColor,
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>*/ borderColor,
       String borderCapStyle,
       List<num> borderDash,
       num borderDashOffset,
       String borderJoinStyle,
+      String /*'left'|'right'|'top'|'bottom'*/ borderSkipped,
       List<dynamic> /*List<num>|List<ChartPoint>*/ data,
-      bool fill,
+      dynamic /*bool|num|String*/ fill,
+      dynamic /*String|List<String>*/ hoverBackgroundColor,
+      dynamic /*String|List<String>*/ hoverBorderColor,
+      dynamic /*num|List<num>*/ hoverBorderWidth,
       String label,
       num lineTension,
-      dynamic /*String|CanvasGradient|CanvasPattern|List<String|CanvasGradient|CanvasPattern>*/ pointBorderColor,
-      dynamic /*String|CanvasGradient|CanvasPattern|List<String|CanvasGradient|CanvasPattern>*/ pointBackgroundColor,
+      dynamic /*'before'|'after'|bool*/ steppedLine,
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>|List<String|CanvasGradient|CanvasPattern|List<String>>*/ pointBorderColor,
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>|List<String|CanvasGradient|CanvasPattern|List<String>>*/ pointBackgroundColor,
       dynamic /*num|List<num>*/ pointBorderWidth,
       dynamic /*num|List<num>*/ pointRadius,
       dynamic /*num|List<num>*/ pointHoverRadius,
       dynamic /*num|List<num>*/ pointHitRadius,
-      dynamic /*String|CanvasGradient|CanvasPattern|List<String|CanvasGradient|CanvasPattern>*/ pointHoverBackgroundColor,
-      dynamic /*String|CanvasGradient|CanvasPattern|List<String|CanvasGradient|CanvasPattern>*/ pointHoverBorderColor,
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>|List<String|CanvasGradient|CanvasPattern|List<String>>*/ pointHoverBackgroundColor,
+      dynamic /*String|CanvasGradient|CanvasPattern|List<String>|List<String|CanvasGradient|CanvasPattern|List<String>>*/ pointHoverBorderColor,
       dynamic /*num|List<num>*/ pointHoverBorderWidth,
-      dynamic /*String|List<String>|ImageElement|List<ImageElement>*/ pointStyle,
+      dynamic /*'circle'|'cross'|'crossRot'|'dash'|'line'|'rect'|'rectRounded'|'rectRot'|'star'|'triangle'|ImageElement|List<'circle'|'cross'|'crossRot'|'dash'|'line'|'rect'|'rectRounded'|'rectRot'|'star'|'triangle'|ImageElement>*/ pointStyle,
       String xAxisID,
-      String yAxisID});
+      String yAxisID,
+      String type,
+      bool hidden,
+      bool hideInLegendAndTooltip,
+      bool showLine,
+      String stack,
+      bool spanGaps});
 }
 
 @anonymous
@@ -901,7 +969,7 @@ abstract class ChartScales<T extends TickOptions> {
 @anonymous
 @JS()
 abstract class CommonAxe {
-  external String /*'category'|'linear'|'logarithmic'|'time'|'radialLinear'|String*/ get type;
+   external String /*'category'|'linear'|'logarithmic'|'time'|'radialLinear'|String*/ get type;
   external set type(
       String /*'category'|'linear'|'logarithmic'|'time'|'radialLinear'|String*/ v);
   external bool get display;
@@ -920,16 +988,20 @@ abstract class CommonAxe {
   external set barThickness(num v);
   external ScaleTitleOptions get scaleLabel;
   external set scaleLabel(ScaleTitleOptions v);
-  external factory CommonAxe(
-      {String /*'category'|'linear'|'logarithmic'|'time'|'radialLinear'|String*/ type,
-      bool display,
-      String id,
-      bool stacked,
-      String position,
-      TickOptions ticks,
-      GridLineOptions gridLines,
-      num barThickness,
-      ScaleTitleOptions scaleLabel});
+  external void beforeUpdate([dynamic scale]);
+  external void beforeSetDimension([dynamic scale]);
+  external void beforeDataLimits([dynamic scale]);
+  external void beforeBuildTicks([dynamic scale]);
+  external void beforeTickToLabelConversion([dynamic scale]);
+  external void beforeCalculateTickRotation([dynamic scale]);
+  external void beforeFit([dynamic scale]);
+  external void afterUpdate([dynamic scale]);
+  external void afterSetDimension([dynamic scale]);
+  external void afterDataLimits([dynamic scale]);
+  external void afterBuildTicks([dynamic scale]);
+  external void afterTickToLabelConversion([dynamic scale]);
+  external void afterCalculateTickRotation([dynamic scale]);
+  external void afterFit([dynamic scale]);
 }
 
 @anonymous
@@ -1101,59 +1173,3 @@ abstract class RadialLinearScale {
       TickOptions ticks});
 }
 
-@JS()
-class Chart {
-  // @Ignore
-  Chart.fakeConstructor$();
-  //external static dynamic get Chart;
-  //external static set Chart(dynamic v);
-  external factory Chart(
-      dynamic /*String|JQuery|CanvasRenderingContext2D|CanvasElement|List<String>|List<CanvasRenderingContext2D>|List<CanvasElement>*/ context,
-      ChartConfiguration options);
-  external dynamic getDatasetMeta(int index);
-  external ChartConfiguration get config;
-  external set config(ChartConfiguration v);
-  external LinearChartData get data;
-  external set data(LinearChartData v);
-  external Func0<dynamic /*{}*/ > get destroy;
-  external set destroy(Func0<dynamic /*{}*/ > v);
-  external Function /*(duration?: any, lazy?: any) => {}*/ get update;
-  external set update(Function /*(duration?: any, lazy?: any) => {}*/ v);
-  external Function /*(duration?: any, lazy?: any) => {}*/ get render;
-  external set render(Function /*(duration?: any, lazy?: any) => {}*/ v);
-  external Func0<dynamic /*{}*/ > get stop;
-  external set stop(Func0<dynamic /*{}*/ > v);
-  external Func0<dynamic /*{}*/ > get resize;
-  external set resize(Func0<dynamic /*{}*/ > v);
-  external Func0<dynamic /*{}*/ > get clear;
-  external set clear(Func0<dynamic /*{}*/ > v);
-  external Func0<String> get toBase64Image;
-  external set toBase64Image(Func0<String> v);
-  external Func0<dynamic /*{}*/ > get generateLegend;
-  external set generateLegend(Func0<dynamic /*{}*/ > v);
-  external Func1<dynamic, dynamic /*{}*/ > get getElementAtEvent;
-  external set getElementAtEvent(Func1<dynamic, dynamic /*{}*/ > v);
-  external Func1<dynamic, List<dynamic /*{}*/ >> get getElementsAtEvent;
-  external set getElementsAtEvent(Func1<dynamic, List<dynamic /*{}*/ >> v);
-  external Func1<dynamic, List<dynamic /*{}*/ >> get getDatasetAtEvent;
-  external set getDatasetAtEvent(Func1<dynamic, List<dynamic /*{}*/ >> v);
-  external CanvasRenderingContext2D /*CanvasRenderingContext2D|Null*/ get ctx;
-  external set ctx(
-      CanvasRenderingContext2D /*CanvasRenderingContext2D|Null*/ v);
-  external CanvasElement /*CanvasElement|Null*/ get canvas;
-  external set canvas(CanvasElement /*CanvasElement|Null*/ v);
-  external ChartArea get chartArea;
-  external set chartArea(ChartArea v);
-  external static PluginServiceStatic get pluginService;
-  external static set pluginService(PluginServiceStatic v);
-  external static dynamic /*{
-        global: Chart.ChartOptions;
-    }*/
-      get defaults;
-  external static set defaults(
-      dynamic
-          /*{
-        global: Chart.ChartOptions;
-    }*/
-          v);
-}
