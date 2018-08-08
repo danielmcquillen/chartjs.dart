@@ -869,6 +869,31 @@ abstract class LinearTickOptions implements TickOptions<num> {
   external set suggestedMin(num v);
   external num get suggestedMax;
   external set suggestedMax(num v);
+  external factory LinearTickOptions(
+      {bool beginAtZero,
+      num min,
+      num max,
+      num maxTicksLimit,
+      num stepSize,
+      num suggestedMin,
+      num suggestedMax,
+      bool autoSkip,
+      Func3<dynamic, dynamic, dynamic, String> callback,
+      bool display,
+      dynamic /*String|CanvasGradient|CanvasPattern*/ fontColor,
+      String fontFamily,
+      num fontSize,
+      String fontStyle,
+      num labelOffset,
+      num maxRotation,
+      num minRotation,
+      bool mirror,
+      num padding,
+      bool reverse,
+      dynamic /*String|CanvasGradient|CanvasPattern*/ backdropColor,
+      num backdropPaddingX,
+      num backdropPaddingY,
+bool showLabelBackdrop});
 }
 
 @anonymous
