@@ -81,6 +81,70 @@ class Chart {
           v);
 }
 
+
+@JS()
+class PluginServiceStatic {
+  // @Ignore
+  PluginServiceStatic.fakeConstructor$();
+  external void register([PluginServiceRegistrationOptions plugin]);
+}
+
+
+@anonymous
+@JS()
+abstract class PluginServiceRegistrationOptions {
+  external void beforeInit(Chart chartInstance);
+  external void afterInit(Chart chartInstance);
+  external void resize(Chart chartInstance, Size newChartSize);
+  external void beforeUpdate(Chart chartInstance);
+  external void afterScaleUpdate(Chart chartInstance);
+  external void beforeDatasetsUpdate(Chart chartInstance);
+  external void afterDatasetsUpdate(Chart chartInstance);
+  external void afterUpdate(Chart chartInstance);
+
+  /// This is called at the start of a render. It is only called once, even if the animation will run for a number of frames. Use beforeDraw or afterDraw
+  /// to do something on each animation frame
+  external void beforeRender(Chart chartInstance);
+
+  /// Easing is for animation
+  external void beforeDraw(Chart chartInstance, String easing);
+  external void afterDraw(Chart chartInstance, String easing);
+
+  /// Before the datasets are drawn but after scales are drawn
+  external void beforeDatasetsDraw(Chart chartInstance, String easing);
+  external void afterDatasetsDraw(Chart chartInstance, String easing);
+  external void destroy(Chart chartInstance);
+
+  /// Called when an event occurs on the chart
+  external void beforeEvent(Chart chartInstance, Event event);
+  external void afterEvent(Chart chartInstance, Event event);
+}
+
+@anonymous
+@JS()
+abstract class Size {
+  external num get height;
+  external set height(num v);
+  external num get width;
+  external set width(num v);
+  external factory Size({num height, num width});
+}
+
+
+@anonymous
+@JS()
+abstract class ChartArea {
+  external num get top;
+  external set top(num v);
+  external num get right;
+  external set right(num v);
+  external num get bottom;
+  external set bottom(num v);
+  external num get left;
+  external set left(num v);
+  external factory ChartArea({num top, num right, num bottom, num left});
+}
+
 @anonymous
 @JS()
 abstract class ChartLegendItem {
