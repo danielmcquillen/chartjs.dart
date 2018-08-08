@@ -443,6 +443,16 @@ abstract class ChartLegendLabelOptions {
   external num get padding;
   external set padding(num v);
   external dynamic generateLabels(dynamic chart);
+  external Func1<dynamic, dynamic> get generateLabels;
+  external Func1<dynamic, dynamic> get generateLabels;
+  external factory ChartLegendLabelOptions(
+      {num boxWidth,
+      num fontSize,
+      num fontStyle,
+      dynamic /*String|CanvasGradient|CanvasPattern*/ fontColor,
+      String fontFamily,
+      num padding,
+      Func1<dynamic, dynamic> generateLabels});
 }
 
 @anonymous
