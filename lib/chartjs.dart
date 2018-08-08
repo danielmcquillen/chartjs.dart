@@ -412,7 +412,7 @@ abstract class ChartLegendOptions {
   external bool get fullWidth;
   external set fullWidth(bool v);
   external VoidFunc2<dynamic, dynamic> get onClick;
-  external void onClick(MouseEvent event, ChartLegendItem legendItem);
+  external set onClick(VoidFunc2<dynamic, dynamic> v);
   external void onHover(MouseEvent event, ChartLegendItem legendItem);
   external ChartLegendLabelOptions get labels;
   external set labels(ChartLegendLabelOptions v);
@@ -442,9 +442,8 @@ abstract class ChartLegendLabelOptions {
   external set fontFamily(String v);
   external num get padding;
   external set padding(num v);
-  external dynamic generateLabels(dynamic chart);
   external Func1<dynamic, dynamic> get generateLabels;
-  external Func1<dynamic, dynamic> get generateLabels;
+  external set generateLabels(Func1<dynamic, dynamic> v);
   external factory ChartLegendLabelOptions(
       {num boxWidth,
       num fontSize,
